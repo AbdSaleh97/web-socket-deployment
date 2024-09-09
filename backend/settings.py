@@ -187,6 +187,11 @@ REST_FRAMEWORK = {
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://web-socket-deployment.onrender.com',
+]
+
+
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),  # Set the access token lifetime
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),  # Set the refresh token lifetime
