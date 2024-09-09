@@ -8,7 +8,6 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class CartSerializer(serializers.ModelSerializer):
-    # Use ProductSerializer for read operations, PrimaryKeyRelatedField for writes
     product = serializers.PrimaryKeyRelatedField(queryset=Product.objects.all())
 
     class Meta:

@@ -15,6 +15,7 @@ import os
 from dotenv import load_dotenv
 from pathlib import Path
 from datetime import timedelta
+import dj_database_url
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
+    'channels',
     'rest_framework',
     'account',
     'store',
@@ -55,6 +57,7 @@ INSTALLED_APPS = [
     'like',
     'report',
     'cart',
+    'chat',
 ]
 
 MIDDLEWARE = [
@@ -87,17 +90,32 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "backend.wsgi.application"
+# WSGI_APPLICATION = "backend.wsgi.application"
+
+# settings.py
+
+ASGI_APPLICATION = 'backend.asgi.application'
+
+# Define the channel layers
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],  # Redis instance (make sure Redis is installed and running)
+        },
+    },
+}
 
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+    'default': dj_database_url.config(
+        # Replace this value with your local database's connection string.
+        default='postgresql://invest_era_fxzu_user:w37qmsR8L1sCu7PoXRLcV5mvxOWnfdfM@dpg-crfles2j1k6c73cpmm80-a/invest_era_fxzu',
+        conn_max_age=600
+    )
 }
 
 
@@ -145,7 +163,7 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage" if not DEBUG else "django.contrib.staticfiles.storage.StaticFilesStorage"
 CORS_ALLOW_ALL_ORIGINS = True
 
 REST_FRAMEWORK = {
