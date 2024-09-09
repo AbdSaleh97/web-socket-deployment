@@ -28,4 +28,4 @@ class LikeSerializer(serializers.ModelSerializer):
             return IdeaSerializer(obj.content_object).data
         elif isinstance(obj.content_object, Report):
             return ReportSerializer(obj.content_object).data
-        return None
+        return None  # In case the content_object is of an unsupported type

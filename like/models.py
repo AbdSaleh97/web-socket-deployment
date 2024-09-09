@@ -15,4 +15,4 @@ class Like(models.Model):
         unique_together = ('user', 'content_type', 'object_id')
 
     def __str__(self):
-        return f"{self.user} liked {self.content_type} with ID {self.object_id}"
+        return f"{self.user.username} liked {self.content_type} with ID {self.object_id}"
