@@ -113,7 +113,7 @@ CHANNEL_LAYERS = {
 DATABASES = {
     'default': dj_database_url.config(
         # Replace this value with your local database's connection string.
-        default='postgresql://invest_era_user:WIgX4GSXsDaS4eZnqU6ktn9mCI8R3NAJ@dpg-crf1qqbv2p9s73d3q9dg-a/invest_era',
+        default='postgresql://invest_era_fxzu_user:w37qmsR8L1sCu7PoXRLcV5mvxOWnfdfM@dpg-crfles2j1k6c73cpmm80-a/invest_era_fxzu',
         conn_max_age=600
     )
 }
