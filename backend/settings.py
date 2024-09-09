@@ -111,10 +111,11 @@ CHANNEL_LAYERS = {
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+    'default': dj_database_url.config(
+        # Replace this value with your local database's connection string.
+        default='postgresql://invest_era_user:WIgX4GSXsDaS4eZnqU6ktn9mCI8R3NAJ@dpg-crf1qqbv2p9s73d3q9dg-a/invest_era',
+        conn_max_age=600
+    )
 }
 
 
@@ -162,7 +163,7 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage" if not DEBUG else "django.contrib.staticfiles.storage.StaticFilesStorage"
 CORS_ALLOW_ALL_ORIGINS = True
 
 REST_FRAMEWORK = {
