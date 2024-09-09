@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
+    'channels',
     'rest_framework',
     'account',
     'store',
@@ -55,6 +56,7 @@ INSTALLED_APPS = [
     'like',
     'report',
     'cart',
+    'chat',
 ]
 
 MIDDLEWARE = [
@@ -87,7 +89,23 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "backend.wsgi.application"
+# WSGI_APPLICATION = "backend.wsgi.application"
+
+# settings.py
+
+ASGI_APPLICATION = 'backend.asgi.application'
+
+# Define the channel layers
+# settings.py
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',  # Ensure this is correct
+        'CONFIG': {
+            'hosts': [('127.0.0.1', 6379)],  # Redis should be running on this port
+        },
+    },
+}
+
 
 
 # Database

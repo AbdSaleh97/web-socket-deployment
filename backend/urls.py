@@ -4,6 +4,7 @@ from rest_framework_simplejwt.views import TokenRefreshView
 from account.views import CustomTokenObtainPairView  # Import your custom view
 from django.conf import settings
 from django.conf.urls.static import static
+from django.urls import re_path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -16,6 +17,7 @@ urlpatterns = [
     path('like/',include('like.urls')),
     path('reports/',include('report.urls')),
     path('cart/',include('cart.urls')),
+
 
     
     path('api/token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),  # Use custom view
