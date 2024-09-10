@@ -101,10 +101,11 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('redis://red-crfmbuaj1k6c73cq0gh0:6379', 6379)],  # Redis instance (make sure Redis is installed and running)
+            "hosts": [('red-crfmbuaj1k6c73cq0gh0', 6379)],  # Corrected without 'redis://'
         },
     },
 }
+
 
 
 # Database
