@@ -101,22 +101,24 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('redis://red-crfmbuaj1k6c73cq0gh0:6379', 6379)],  # Redis instance (make sure Redis is installed and running)
+            "hosts": [('127.0.0.1', 6379)],  # Redis instance (make sure Redis is installed and running)
         },
     },
 }
+
+
 
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(
-        # Replace this value with your local database's connection string.
-        default='postgresql://invest_era_fxzu_user:w37qmsR8L1sCu7PoXRLcV5mvxOWnfdfM@dpg-crfles2j1k6c73cpmm80-a/invest_era_fxzu',
-        conn_max_age=600
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
+
 
 
 # Password validation
@@ -168,15 +170,24 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage" 
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000', 
+    'http://127.0.0.1:8000',  # Add this if you're using this port for development
+    'https://web-socket-deployment.onrender.com',
+]
+
 CORS_ALLOW_METHODS = [
     'GET',
     'POST',
     'PUT',
+    'PATCH', 
     'DELETE',
     'OPTIONS',
 ]
+
+CORS_ALLOW_CREDENTIALS = True
+
 
 
 REST_FRAMEWORK = {
